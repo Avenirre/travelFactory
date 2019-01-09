@@ -21,7 +21,7 @@ import com.travelfactory.repositories.HotelBookingRepository;
 @ConfigurationProperties
 public class CSVScanner{
 	
-	@Value("${scanDirectory}") // should be working ok now
+	//@Value("${scanDirectory}") // should be working ok now
 	String scanDirectory = "/Users/romandimitrievich/travelExamples";
 	
 	@Autowired
@@ -66,7 +66,8 @@ public class CSVScanner{
 	private boolean isUsedBefore(String name) {
 		//TODO need to implement existsById method, it's not a part of mongo repository
 		//if (!fileNameRepository.existsById(name)) {
-		if (!fileNameRepository.exists(name)) {
+		FileNameEntity fileNameEntity = fileNameRepository.findByName(name);
+		if (fileNameEntity == null) {
 			fileNameRepository.save(new FileNameEntity(name));
 			return false;
 		} else {

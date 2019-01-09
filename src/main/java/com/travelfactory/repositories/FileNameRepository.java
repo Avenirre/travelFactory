@@ -6,4 +6,8 @@ import com.travelfactory.entities.FileNameEntity;
 
 public interface FileNameRepository extends MongoRepository<FileNameEntity, String> {
 
+	FileNameEntity findByName(String name);
+
+
+
 }
